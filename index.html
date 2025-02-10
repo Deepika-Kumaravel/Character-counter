@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+    <style>
+        #textarea-container {
+            width: 50%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #textarea {
+            width: 96%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+        
+        #character-counter {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        #warning-message {
+            font-size: 14px;
+            color: #f00;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="textarea-container">
+        <textarea id="textarea" maxlength="200"></textarea>
+        <p id="character-counter">200 characters max</p>
+        <p id="warning-message">You have exceeded the character limit!</p>
+    </div>
+    
+    <script>
+        const textarea = document.getElementById('textarea');
+        const characterCounter = document.getElementById('character-counter');
+        const warningMessage = document.getElementById('warning-message');
+        const maxCharacters = 200;
+        
+        textarea.addEventListener('input', () => {
+            const currentCharacters = textarea.value.length;
+            const remainingCharacters = maxCharacters - currentCharacters;
+            
+            characterCounter.innerText = `${currentCharacters}/${maxCharacters} characters`;
+            
+            if (currentCharacters >= maxCharacters) {
+                warningMessage.style.display = 'block';
+                textarea.value = textarea.value.substring(0, maxCharacters);
+            } else {
+                warningMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
